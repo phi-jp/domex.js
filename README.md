@@ -1,0 +1,2 @@
+# domex.js
+dom extension
