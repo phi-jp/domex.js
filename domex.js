@@ -3,6 +3,7 @@
  */
 
 ;(function() {
+
 	Object.defineProperty(HTMLElement.prototype, 'html', {
 		get: function() {
 			return this.innerHTML;
@@ -33,6 +34,46 @@
 		},
 	});
 
+	Object.defineProperty(HTMLElement.prototype, 'append', {
+		value: function(child) {
+			this.appendChild(child);
+			return this;
+		},
+	});
+
+	Object.defineProperty(HTMLElement.prototype, 'appendTo', {
+		value: function(parent) {
+			parent.appendChild(this);
+			return this;
+		},
+	});
+
+	Object.defineProperty(HTMLElement.prototype, 'create', {
+		value: function(tagName, append) {
+			append = (append !== undefined) ? append : true;
+
+			var elm = document.createElement(tagName);
+			if (append) {
+				this.append(elm);
+			}
+
+			return elm;
+		},
+	});
+
+	Object.defineProperty(HTMLElement.prototype, 'styling', {
+		value: function(key, value) {
+			this.style[key] = value;
+			return this;
+		},
+	});
+	Object.defineProperty(HTMLElement.prototype, 'attributing', {
+		value: function(key, value) {
+			this.setAttribute(key, value);
+			return this;
+		},
+	});
+
 	Object.defineProperty(HTMLElement.prototype, 'q', {
 		value: function(query) {
 			return this.querySelector(query);
@@ -54,4 +95,5 @@
 			return Array.prototype.slice.call(this);
 		},
 	});
+	
 })();
